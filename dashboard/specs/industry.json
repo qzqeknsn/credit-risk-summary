@@ -1,0 +1,67 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": null,
+  "data": {
+    "url": "data/industry.json"
+  },
+  "width": "container",
+  "height": 300,
+  "mark": {
+    "type": "bar",
+    "cornerRadiusEnd": 4,
+    "cursor": "pointer"
+  },
+  "encoding": {
+    "y": {
+      "field": "segment",
+      "type": "nominal",
+      "title": null,
+      "sort": {
+        "field": "npl_rate",
+        "op": "max",
+        "order": "descending"
+      },
+      "axis": {
+        "labelLimit": 300,
+        "labelColor": "#64748b",
+        "labelFontSize": 12
+      }
+    },
+    "yOffset": {
+      "field": "snapshot_label",
+      "type": "nominal"
+    },
+    "x": {
+      "field": "npl_rate",
+      "type": "quantitative",
+      "title": "NPL, %",
+      "axis": {
+        "format": ".0%",
+        "gridColor": "#f1f5f9",
+        "labelColor": "#94a3b8"
+      }
+    },
+    "color": {
+      "field": "snapshot_label",
+      "type": "nominal",
+      "title": "Дата",
+      "scale": {
+        "range": ["#cbd5e1", "#2563eb"]
+      },
+      "legend": {
+        "orient": "bottom",
+        "title": null
+      }
+    },
+    "tooltip": [
+      {"field": "segment", "title": "Отрасль"},
+      {"field": "snapshot_label", "title": "Дата"},
+      {"field": "npl_rate", "title": "NPL", "format": ".2%"},
+      {"field": "portfolio_kzt", "title": "Портфель", "format": ",.0f"}
+    ]
+  },
+  "config": {
+    "font": "Inter, system-ui, sans-serif",
+    "view": { "stroke": "transparent" }
+  }
+}

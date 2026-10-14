@@ -1,0 +1,62 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": null,
+  "data": {
+    "url": "data/trend.json"
+  },
+  "width": "container",
+  "height": 300,
+  "mark": {
+    "type": "bar",
+    "stroke": "white",
+    "strokeWidth": 1,
+    "cornerRadiusEnd": 4,
+    "cursor": "pointer"
+  },
+  "encoding": {
+    "x": {
+      "field": "metric",
+      "type": "nominal",
+      "title": null,
+      "axis": {
+        "labelAngle": 0,
+        "labelColor": "#64748b"
+      }
+    },
+    "y": {
+      "field": "value",
+      "type": "quantitative",
+      "title": "Доля портфеля",
+      "axis": {
+        "format": ".0%",
+        "gridColor": "#f1f5f9",
+        "labelColor": "#94a3b8"
+      }
+    },
+    "xOffset": {
+      "field": "snapshot_label",
+      "type": "nominal"
+    },
+    "color": {
+      "field": "snapshot_label",
+      "type": "nominal",
+      "title": "Дата",
+      "scale": {
+        "range": ["#cbd5e1", "#2563eb"]
+      },
+      "legend": {
+        "orient": "bottom",
+        "title": null
+      }
+    },
+    "tooltip": [
+      {"field": "metric", "title": "Метрика"},
+      {"field": "snapshot_label", "title": "Дата"},
+      {"field": "value", "title": "Значение", "format": ".2%"}
+    ]
+  },
+  "config": {
+    "font": "Inter, system-ui, sans-serif",
+    "view": { "stroke": "transparent" }
+  }
+}

@@ -1,0 +1,42 @@
+[
+  {
+    "metric": "NPL",
+    "snapshot_label": "01.09",
+    "value": 0.11850843611254334
+  },
+  {
+    "metric": "NPL",
+    "snapshot_label": "01.10",
+    "value": 0.10013577438463969
+  },
+  {
+    "metric": "PAR30",
+    "snapshot_label": "01.09",
+    "value": 0.12049406008283074
+  },
+  {
+    "metric": "PAR30",
+    "snapshot_label": "01.10",
+    "value": 0.10326384047551972
+  },
+  {
+    "metric": "PAR90",
+    "snapshot_label": "01.09",
+    "value": 0.062426243201990084
+  },
+  {
+    "metric": "PAR90",
+    "snapshot_label": "01.10",
+    "value": 0.04464694627679072
+  },
+  {
+    "metric": "Покрытие",
+    "snapshot_label": "01.09",
+    "value": 0.0732952372144219
+  },
+  {
+    "metric": "Покрытие",
+    "snapshot_label": "01.10",
+    "value": 0.06431372805896246
+  }
+]

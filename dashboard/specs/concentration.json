@@ -1,0 +1,60 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": null,
+  "data": {
+    "url": "data/concentration.json"
+  },
+  "width": "container",
+  "height": 300,
+  "mark": {
+    "type": "bar",
+    "cornerRadiusEnd": 4,
+    "cursor": "pointer"
+  },
+  "encoding": {
+    "x": {
+      "field": "snapshot_label",
+      "type": "nominal",
+      "title": null,
+      "axis": {
+        "labelAngle": 0,
+        "labelColor": "#64748b"
+      }
+    },
+    "y": {
+      "field": "ratio",
+      "type": "quantitative",
+      "title": "Доля портфеля",
+      "axis": {
+        "format": ".0%",
+        "gridColor": "#f1f5f9",
+        "labelColor": "#94a3b8"
+      },
+      "scale": {
+        "domain": [
+          0,
+          0.3
+        ]
+      }
+    },
+    "color": {
+      "field": "snapshot_label",
+      "type": "nominal",
+      "legend": null,
+      "scale": {
+        "range": [
+          "#cbd5e1",
+          "#334155"
+        ]
+      }
+    },
+    "tooltip": [
+      {"field": "snapshot_label", "title": "Дата"},
+      {"field": "ratio", "title": "Доля топ-10", "format": ".2%"}
+    ]
+  },
+  "config": {
+    "font": "Inter, system-ui, sans-serif",
+    "view": { "stroke": "transparent" }
+  }
+}

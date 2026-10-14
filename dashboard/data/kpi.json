@@ -1,0 +1,51 @@
+[
+  {
+    "order": 1,
+    "label": "Портфель",
+    "value_text": "484.7 млрд ₸",
+    "delta_text": "−2.7%",
+    "delta_color": "#718096"
+  },
+  {
+    "order": 2,
+    "label": "PAR30",
+    "value_text": "10.3%",
+    "delta_text": "−1.7 п.п.",
+    "delta_color": "#2f855a"
+  },
+  {
+    "order": 3,
+    "label": "PAR90",
+    "value_text": "4.5%",
+    "delta_text": "−1.8 п.п.",
+    "delta_color": "#2f855a"
+  },
+  {
+    "order": 4,
+    "label": "NPL",
+    "value_text": "10.0%",
+    "delta_text": "−1.8 п.п.",
+    "delta_color": "#2f855a"
+  },
+  {
+    "order": 5,
+    "label": "Провизии",
+    "value_text": "31.2 млрд ₸",
+    "delta_text": "−14.6%",
+    "delta_color": "#718096"
+  },
+  {
+    "order": 6,
+    "label": "Покрытие",
+    "value_text": "6.43%",
+    "delta_text": "−0.9 п.п.",
+    "delta_color": "#c53030"
+  },
+  {
+    "order": 7,
+    "label": "Концентрация топ-10",
+    "value_text": "17.0%",
+    "delta_text": "0.0 п.п.",
+    "delta_color": "#718096"
+  }
+]

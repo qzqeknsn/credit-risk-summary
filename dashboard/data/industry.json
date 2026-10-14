@@ -1,0 +1,86 @@
+[
+  {
+    "segment": "АПК",
+    "snapshot_label": "01.09",
+    "npl_rate": 0.1203972046445632,
+    "par30_rate": 0.11210918829556803,
+    "portfolio_kzt": 77205252126.352
+  },
+  {
+    "segment": "АПК",
+    "snapshot_label": "01.10",
+    "npl_rate": 0.10374659397639457,
+    "par30_rate": 0.07952271690047752,
+    "portfolio_kzt": 74308965294.023
+  },
+  {
+    "segment": "Промышленность",
+    "snapshot_label": "01.09",
+    "npl_rate": 0.14314243146220113,
+    "par30_rate": 0.08468419861599483,
+    "portfolio_kzt": 107414315441.422
+  },
+  {
+    "segment": "Промышленность",
+    "snapshot_label": "01.10",
+    "npl_rate": 0.1352647606283959,
+    "par30_rate": 0.1645109824042281,
+    "portfolio_kzt": 103588691337.953
+  },
+  {
+    "segment": "Строительство",
+    "snapshot_label": "01.09",
+    "npl_rate": 0.11504315408541439,
+    "par30_rate": 0.15845860651058202,
+    "portfolio_kzt": 85091757838.8275
+  },
+  {
+    "segment": "Строительство",
+    "snapshot_label": "01.10",
+    "npl_rate": 0.08987454157210994,
+    "par30_rate": 0.08169656879640613,
+    "portfolio_kzt": 82462968727.352
+  },
+  {
+    "segment": "Торговля",
+    "snapshot_label": "01.09",
+    "npl_rate": 0.10431018218967869,
+    "par30_rate": 0.12035810658608234,
+    "portfolio_kzt": 73108769169.8575
+  },
+  {
+    "segment": "Торговля",
+    "snapshot_label": "01.10",
+    "npl_rate": 0.08098407758047657,
+    "par30_rate": 0.07750165477105452,
+    "portfolio_kzt": 71861931694.484
+  },
+  {
+    "segment": "Транспорт",
+    "snapshot_label": "01.09",
+    "npl_rate": 0.0939019970124745,
+    "par30_rate": 0.12712450915082293,
+    "portfolio_kzt": 84777644490.132
+  },
+  {
+    "segment": "Транспорт",
+    "snapshot_label": "01.10",
+    "npl_rate": 0.08415198875091168,
+    "par30_rate": 0.1175260248527116,
+    "portfolio_kzt": 84800832806.565
+  },
+  {
+    "segment": "Услуги",
+    "snapshot_label": "01.09",
+    "npl_rate": 0.12739637891421696,
+    "par30_rate": 0.13057411831032456,
+    "portfolio_kzt": 70555489627.982
+  },
+  {
+    "segment": "Услуги",
+    "snapshot_label": "01.10",
+    "npl_rate": 0.09526678287593528,
+    "par30_rate": 0.07133609036631834,
+    "portfolio_kzt": 67651380972.381
+  }
+]

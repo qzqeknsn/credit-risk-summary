@@ -1,0 +1,14 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": null,
+  "data": {
+    "url": "data/kpi.json"
+  },
+  "mark": "text",
+  "encoding": {
+    "text": {
+      "field": "value_text",
+      "type": "nominal"
+    }
+  }
+}

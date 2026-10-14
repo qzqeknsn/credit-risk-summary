@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Сводка кредитного риска</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega@5.30.0"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.21.0"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.26.0"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+    body { font-family: 'Inter', sans-serif; }
+
+    /* Tooltip styling for HTML elements */
+    .term-tooltip {
+      position: relative;
+      cursor: help;
+      border-bottom: 1px dotted #94a3b8;
+    }
+    .term-tooltip:hover::after {
+      content: attr(data-tooltip);
+      position: absolute;
+      bottom: 125%;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: #1e293b;
+      color: #fff;
+      padding: 8px 12px;
+      border-radius: 6px;
+      font-size: 12px;
+      white-space: pre-wrap;
+      width: 200px;
+      text-align: center;
+      z-index: 50;
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+      font-weight: normal;
+    }
+    .term-tooltip:hover::after {
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-900 min-h-screen">
+
+  <header class="bg-slate-900 text-white py-8 px-6 shadow-md">
+    <div class="max-w-6xl mx-auto flex justify-between items-center">
+      <div>
+        <h1 class="text-3xl font-bold">Сводка кредитного риска</h1>
+        <p class="text-slate-400 mt-2">Анализ качества портфеля: 01.09.2026 → 01.10.2026</p>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto p-6 space-y-8">
+
+    <!-- KPI Section -->
+    <div id="kpi-container" class="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-7 gap-4">
+      <!-- KPI cards injected here -->
+    </div>
+
+    <!-- Main Analysis -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 flex flex-col">
+        <div class="flex justify-between items-center mb-4">
+          <h2 class="text-lg font-semibold text-slate-800">
+            <span class="term-tooltip" data-tooltip="NPL (Non-Performing Loans) — доля портфеля с просрочкой более 90 дней или реструктуризированных кредитов.">NPL</span> по отраслям
+          </h2>
+          <button onclick="downloadChart('industry')" class="text-xs bg-slate-100 hover:bg-slate-200 text-slate-600 px-2 py-1 rounded transition-colors border border-slate-200">
+            PNG ⬇
+          </button>
+        </div>
+        <div id="industry" class="w-full"></div>
+      </div>
+
+      <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 flex flex-col">
+        <div class="flex justify-between items-center mb-4">
+          <h2 class="text-lg font-semibold text-slate-800">
+            <span class="term-tooltip" data-tooltip="NPL (Non-Performing Loans) — доля портфеля с просрочкой более 90 дней или реструктуризированных кредитов.">NPL</span> по программам
+          </h2>
+          <button onclick="downloadChart('program')" class="text-xs bg-slate-100 hover:bg-slate-200 text-slate-600 px-2 py-1 rounded transition-colors border border-slate-200">
+            PNG ⬇
+          </button>
+        </div>
+        <div id="program" class="w-full"></div>
+      </div>
+
+      <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 flex flex-col">
+        <div class="flex justify-between items-center mb-4">
+          <h2 class="text-lg font-semibold text-slate-800">
+            Динамика <span class="term-tooltip" data-tooltip="PAR30/90 — доля портфеля с просрочкой > 30 и > 90 дней. Покрытие — отношение провизий к объему NPL.">основных рисков</span>
+          </h2>
+          <button onclick="downloadChart('trend')" class="text-xs bg-slate-100 hover:bg-slate-200 text-slate-600 px-2 py-1 rounded transition-colors border border-slate-200">
+            PNG ⬇
+          </button>
+        </div>
+        <div id="trend" class="w-full"></div>
+      </div>
+
+      <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 flex flex-col">
+        <div class="flex justify-between items-center mb-4">
+          <h2 class="text-lg font-semibold text-slate-800">
+            <span class="term-tooltip" data-tooltip="Концентрация — доля 10 крупнейших групп связанных заёмщиков в общем портфеле.">Концентрация</span> Топ-10 групп
+          </h2>
+          <button onclick="downloadChart('concentration')" class="text-xs bg-slate-100 hover:bg-slate-200 text-slate-600 px-2 py-1 rounded transition-colors border border-slate-200">
+            PNG ⬇
+          </button>
+        </div>
+        <div id="concentration" class="w-full"></div>
+      </div>
+    </div>
+
+    <!-- Conclusions -->
+    <div class="bg-slate-100 p-6 rounded-xl border-l-4 border-slate-900">
+      <h2 class="text-lg font-semibold mb-3 text-slate-800">Выводы для комитета</h2>
+      <ul id="conclusions" class="space-y-3 text-slate-600 list-disc pl-5">
+        <!-- Injected from transition data -->
+      </ul>
+    </div>
+  </main>
+
+  <script>
+    let views = {};
+
+    async function init() {
+      try {
+        const kpiRes = await fetch('data/kpi.json');
+        const kpiData = await kpiRes.json();
+        const container = document.getElementById('kpi-container');
+
+        container.innerHTML = kpiData.map(k => {
+          const color = k.delta_color === '#2f855a' ? 'text-emerald-600' :
+                        k.delta_color === '#c53030' ? 'text-rose-600' : 'text-slate-500';
+          return `
+            <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200">
+              <div class="text-xs font-medium text-slate-500 uppercase">${k.label}</div>
+              <div class="text-xl font-bold text-slate-900 my-1">${k.value_text}</div>
+              <div class="text-xs font-semibold ${color}">${k.delta_text}</div>
+            </div>
+          `;
+        }).join('');
+      } catch (e) { console.error("KPI Error:", e); }
+
+      const charts = ['industry', 'program', 'trend', 'concentration'];
+      for (const id of charts) {
+        try {
+          const res = await fetch(`specs/${id}.json`);
+          const spec = await res.json();
+          const result = await vegaEmbed(`#${id}`, spec, {actions: false});
+          views[id] = result.view;
+        } catch (e) { console.error(`Chart ${id} error:`, e); }
+      }
+
+      const conclusions = document.getElementById('conclusions');
+      const notes = [
+        "NPL 11.85% → 10.01%: просрочка 90+ упала на 9.46 млрд, 53 кредита вернулись в график.",
+        "Реструктурированный блок стабилен (около 5.6% портфеля), остаётся главным риском.",
+        "Покрытие снизилось с 7.33% до 6.43%, достаточность резервов зависит от устойчивости выхода из просрочки."
+      ];
+      conclusions.innerHTML = notes.map(t => `<li>${t}</li>`).join('');
+    }
+
+    async function downloadChart(id) {
+      const view = views[id];
+      if (!view) {
+        alert("График еще загружается, пожалуйста, подождите.");
+        return;
+      }
+      try {
+        const url = await view.toImageURL('png');
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = `${id}_chart.png`;
+        link.click();
+      } catch (e) {
+        console.error(`Error downloading ${id}:`, e);
+        alert("Не удалось скачать график.");
+      }
+    }
+
+    init();
+  </script>
+</body>
+</html>

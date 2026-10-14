@@ -1,0 +1,17 @@
+model: credit_portfolio
+source: reporting.v_loans_clean
+dimensions:
+  - {name: snapshot_date, column: snapshot_date, type: time,    label: "Дата среза"}
+  - {name: industry,      column: industry,      type: string,  label: "Отрасль"}
+  - {name: program,       column: program,       type: string,  label: "Программа"}
+  - {name: group_id,      column: group_id,      type: string,  label: "Группа заёмщиков"}
+  - {name: currency,      column: currency,      type: string,  label: "Валюта"}
+  - {name: dpd,           column: dpd,           type: integer, label: "Дней просрочки"}
+measures:
+  - {name: portfolio_kzt,    column: principal_kzt,    type: sum,   format: "#,##0", label: "Портфель, ₸"}
+  - {name: par30_kzt,        column: par30_kzt,        type: sum,   format: "#,##0", label: "Просрочка >30 дней, ₸"}
+  - {name: par90_kzt,        column: par90_kzt,        type: sum,   format: "#,##0", label: "Просрочка >90 дней, ₸"}
+  - {name: npl_kzt,          column: npl_kzt,          type: sum,   format: "#,##0", label: "NPL, ₸"}
+  - {name: restructured_kzt, column: restructured_kzt, type: sum,   format: "#,##0", label: "Реструктурированные, ₸"}
+  - {name: provisions_kzt,   column: provision_kzt,    type: sum,   format: "#,##0", label: "Провизии, ₸"}
+  - {name: loan_count,       column: loan_id,          type: count, format: "#,##0", label: "Кредитов"}
